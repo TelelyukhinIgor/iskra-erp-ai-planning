@@ -1,0 +1,64 @@
+{
+  "id": "rt-fg-kettle-1700-a",
+  "itemId": "fg-kettle-1700",
+  "revision": "A",
+  "status": "in_review",
+  "uncertainSpots": [
+    {
+      "code": "FASTENER_VARIETY",
+      "message": "Three fastener sizes detected in the draft; confirm whether two can be unified.",
+      "operationId": "op-final-assembly"
+    }
+  ],
+  "operations": [
+    {
+      "id": "op-stamp-base",
+      "sequence": 10,
+      "name": "Stamp base blank",
+      "workCenterId": "wc-press-stamp-02",
+      "setupMinutes": 30,
+      "runMinutesPerUnit": 0.2,
+      "operators": 1
+    },
+    {
+      "id": "op-mold-housing",
+      "sequence": 30,
+      "name": "Injection mould housing",
+      "workCenterId": "wc-press-05",
+      "setupMinutes": 45,
+      "runMinutesPerUnit": 0.8,
+      "operators": 1
+    },
+    {
+      "id": "op-final-assembly",
+      "sequence": 80,
+      "name": "Final assembly and functional test",
+      "workCenterId": "wc-assy-line-1",
+      "setupMinutes": 15,
+      "runMinutesPerUnit": 4.5,
+      "operators": 2,
+      "notes": "Synthetic routing for evaluation only."
+    }
+  ],
+  "bomLines": [
+    {
+      "id": "bom-kettle-granulate",
+      "parentItemId": "fg-kettle-1700",
+      "componentItemId": "rm-pp-granulate",
+      "quantity": 0.46,
+      "uom": "kg",
+      "scrapFactor": 0.03,
+      "isPurchased": true,
+      "leadTimeDays": 14
+    },
+    {
+      "id": "bom-kettle-element",
+      "parentItemId": "fg-kettle-1700",
+      "componentItemId": "pu-heating-element-2200",
+      "quantity": 1,
+      "uom": "ea",
+      "isPurchased": true,
+      "leadTimeDays": 21
+    }
+  ]
+}

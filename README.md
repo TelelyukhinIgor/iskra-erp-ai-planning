@@ -1,1 +1,140 @@
-# iskra-erp-ai-planning
+# Iskra — AI planning layer over ERP / MES
+
+**Discrete manufacturing. Order to machine plan in one working day — without replacing your ERP.**
+
+This repository is a **public showcase**: architecture intent, data-model sketches, and a reference-plant case with **calculated estimates**. It is not the production system. Production models, algorithms, and integrations are proprietary and available under contract.
+
+> Positioning: *I organize how people and businesses work with AI where mistakes are expensive* — roles, specs, cross-checks, and a human go/no-go on every costly decision.
+
+---
+
+## For plant owners (30 seconds)
+
+### The pain (in your words)
+
+- One customer order takes **days in spreadsheets**. Any change means starting over.
+- Drawings and routings live partly on paper and in the heads of **two or three process engineers**. When they leave, the know-how leaves with them.
+- Bottleneck machines overload while others sit idle — you find out too late.
+- Procurement reacts to shortages; the warehouse holds dead stock and missing parts at the same time.
+- Roughly **one order in three** ships late; the director often learns about the miss from the customer.
+- A plant-wide status pack for leadership takes **about two days** to assemble by hand.
+
+### What changes
+
+An AI-assisted planning layer sits **on top of** the ERP (and MES where present). Accounting stays in the systems you already run. The layer reads orders and engineering documents, proposes routings, machine load, procurement, and cash-flow impact, then publishes **tasks for each function**. People approve; nothing reaches the shop floor without a human signature.
+
+On a **reference model** of a household-appliance plant (310 staff, 38 product models), calculated estimates after six months of modelled operation include:
+
+| Indicator | Before (estimate) | After (estimate) |
+|-----------|-------------------|------------------|
+| Order → approved plan | ~4 working days | ~1 working day |
+| Draft plan machine time | ~32 person-hours | ~1 h 40 min |
+| Orders shipped on time | 71% | 88% |
+| Average order lead time | 34 working days | 27 working days |
+| Design → shop transfer errors | baseline | −60% |
+| Material inventory | baseline | −12% (dead stock −15%) |
+| Time to prepare a new modification | baseline | −50% |
+| Bottleneck (moulding) utilisation | 74% | 82% |
+| Overtime hours | baseline | −30% |
+| Leadership status pack | ~2 days manual | near-real-time |
+
+**Disclaimer:** these figures are **calculated estimates on a reference plant model**, not measured results from a named customer implementation. They illustrate order-of-magnitude effect under stated assumptions. See [docs/case-reference-plant.md](docs/case-reference-plant.md).
+
+### One flow
+
+```mermaid
+flowchart LR
+  A[Customer order<br/>any format] --> B[Match products<br/>in digital archive]
+  B --> C[BOM + routing cards]
+  C --> D[Machine & shift load]
+  D --> E[Procurement list]
+  E --> F[Cost & cash flow]
+  F --> G[Tasks to functions]
+  G --> H{Human approval}
+  H -->|Approved| I[ERP / MES documents]
+  H -->|Rejected / edited| C
+```
+
+**Rule:** the system proposes; process engineers and managers decide. No approved routing — no release to the shop.
+
+---
+
+## For technical due diligence
+
+### Architecture overview
+
+Iskra is an **ensemble**, not a single model:
+
+- **Document understanding** — drawings, scans, legacy routing sheets, and order paperwork become structured candidates (geometry cues, quantities, identifiers).
+- **Planning reasoning** — draft BOMs, routing cards, norms, and plain-language explanations for reviewers.
+- **Deterministic schedule optimisation** — machine and shift loading under changeovers, calendars, and priorities (mathematical optimisation; not “the neural net invents the timetable”).
+- **Shop-floor assistants** — lightweight aids for fact capture and prompts to supervisors (optional).
+- **Risk / lead-time signals** — early flags for overload, late parts, and cash gaps.
+- **ERP / MES exchange bus** — read masters and stock; write back **documents and tasks**. The ERP core is not rewritten.
+
+Sensitive domains (people, payroll) are designed to stay **on-premises**. Cloud components are optional and used only under an explicit data-policy decision.
+
+Detail and diagrams: [docs/architecture.md](docs/architecture.md).
+
+### Module boundaries (sellable building blocks)
+
+| Module | Intent | Depends on |
+|--------|--------|------------|
+| **Digital archive + routing cards** | Ingest heterogeneous drawings/docs; propose BOM + routing; human-in-the-loop approval | ERP item masters (or pilot subset) |
+| **Equipment load optimiser** | Feasible shift plans and bottleneck forecast from approved routings | Quality routings + equipment model |
+| **End-to-end order economics** | Buy list, cost, margin, weekly cash view **before** release | Approved structure + stock/price inputs |
+| **Leadership portfolio / Kanban** | One screen: order stages, risks, KPI strip, constrained Q&A on contour data | Statuses from ERP + upstream modules |
+
+Each module has an explicit **in / out of box** boundary (what a pilot includes vs. what is custom). See architecture doc.
+
+### Human-in-the-loop
+
+- Every routing card and plan package has an **approval gate**.
+- Reviewer edits are retained as the plant’s knowledge — the contour learns from corrections under contract deployments; this repo does **not** ship training pipelines.
+- Leadership Q&A answers only from contour data; missing data is stated as missing (no invented facts).
+
+### Data flow (conceptual)
+
+Order & documents → structure candidates → **approve** → schedule & procurement candidates → **approve** → ERP/MES documents → shop execution → fact back into ERP → portfolio view.
+
+Open, generic schemas (evaluation only): [docs/data-model.md](docs/data-model.md), [`schemas/`](schemas/), [`examples/`](examples/).
+
+### Boundary conditions and limits of applicability
+
+**Fits well when**
+
+- Discrete manufacturing with identifiable products, BOMs, and machine/work-centre calendars.
+- An ERP (and optionally MES) already holds orders, stock, and item masters.
+- Leadership accepts a **pilot on one product family** beside the manual plan before plant-wide rollout.
+
+**Does not replace**
+
+- Full PLM/PDM, enterprise BI, or shop-floor SCADA deep integration (beyond basic exchange).
+- Automatic purchase-order negotiation with suppliers.
+- A guarantee of perfect recognition on damaged or incomplete drawings without a process engineer.
+- “Zero changeover” schedules when priorities and constraints contradict each other.
+
+**Out of this repository**
+
+- Production inference code, prompts, model weights, optimiser formulations, drawing parsers, and ERP connector implementations.
+- Customer drawings, prices, payroll, or live plant data.
+- Commercial proposals and pilot pricing.
+
+### What *is* in this repository
+
+- Narrative for owners and auditors (this README).
+- Architecture notes and Mermaid diagrams.
+- A reference-plant case with labelled estimates.
+- High-level JSON Schemas and **synthetic** examples for evaluation of modelling quality.
+- License / NOTICE clarifying proprietary vs. showcase material.
+
+---
+
+## Contact
+
+This repository is a **demonstration**. If your plant needs a process audit, drawing recognition integrated with a legacy ERP, or workstations for process engineers and buyers, contact me for **pre-project consulting**.
+
+- Email: [telelyhina@icloud.com](mailto:telelyhina@icloud.com)
+- LinkedIn: [igor-telelyukhin](https://www.linkedin.com/in/igor-telelyukhin/)
+
+Ljubljana · remote · English / Russian

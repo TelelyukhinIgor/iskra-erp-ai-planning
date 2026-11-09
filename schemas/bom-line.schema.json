@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/iskra/schemas/bom-line.schema.json",
+  "title": "BomLine",
+  "description": "One component or material line in a product structure. Generic evaluation schema.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "parentItemId", "componentItemId", "quantity", "uom"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "parentItemId": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Finished good or assembly being exploded."
+    },
+    "componentItemId": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Child item, material, or purchased part."
+    },
+    "quantity": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "Quantity of component per one parent unit."
+    },
+    "uom": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Unit of measure (e.g. ea, kg, m)."
+    },
+    "scrapFactor": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Optional expected scrap fraction (0–1)."
+    },
+    "isPurchased": {
+      "type": "boolean",
+      "description": "True if the line is typically bought rather than made."
+    },
+    "leadTimeDays": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Indicative procurement lead time in calendar days, if known."
+    }
+  }
+}

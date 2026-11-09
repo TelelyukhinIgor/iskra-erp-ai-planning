@@ -1,0 +1,12 @@
+{
+  "id": "task-ref0418-proc-01",
+  "orderId": "REF-0418",
+  "function": "procurement",
+  "title": "Confirm alternate for long-lead thermal cut-out",
+  "description": "Synthetic task: draft plan flagged a long-lead purchased part. Confirm alternate supplier lead time before plan approval.",
+  "status": "proposed",
+  "priority": "high",
+  "dueDate": "2026-11-12",
+  "relatedItemIds": ["pu-thermal-cutout-10a"],
+  "requiresAcknowledgement": true
+}
