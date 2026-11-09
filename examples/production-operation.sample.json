@@ -1,0 +1,10 @@
+{
+  "id": "op-mold-housing",
+  "sequence": 30,
+  "name": "Injection mould housing",
+  "workCenterId": "wc-press-05",
+  "setupMinutes": 45,
+  "runMinutesPerUnit": 0.8,
+  "operators": 1,
+  "notes": "Synthetic example — not plant data."
+}

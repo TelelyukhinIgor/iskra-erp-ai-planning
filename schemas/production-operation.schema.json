@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/iskra/schemas/production-operation.schema.json",
+  "title": "ProductionOperation",
+  "description": "One manufacturing step inside a routing card. Generic evaluation schema — not a wire format for the production system.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "sequence", "name", "workCenterId"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Opaque operation identifier."
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Order of the step within the routing (1-based)."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Human-readable operation name."
+    },
+    "workCenterId": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Work centre or machine group identifier as known to planning."
+    },
+    "setupMinutes": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Standard setup / changeover time in minutes."
+    },
+    "runMinutesPerUnit": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Run time minutes per finished unit at this step."
+    },
+    "operators": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Typical headcount required at the step."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Free-text process notes for reviewers."
+    }
+  }
+}

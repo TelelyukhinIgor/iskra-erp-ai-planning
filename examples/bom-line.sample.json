@@ -1,0 +1,10 @@
+{
+  "id": "bom-kettle-granulate",
+  "parentItemId": "fg-kettle-1700",
+  "componentItemId": "rm-pp-granulate",
+  "quantity": 0.46,
+  "uom": "kg",
+  "scrapFactor": 0.03,
+  "isPurchased": true,
+  "leadTimeDays": 14
+}

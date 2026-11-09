@@ -1,0 +1,27 @@
+Iskra showcase repository
+=========================
+
+Copyright (c) Igor Telelyukhin
+
+1. Documentation and narrative text in this repository (including README.md
+   and files under docs/) are licensed under Creative Commons
+   Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0).
+   See the LICENSE file.
+
+2. JSON Schemas under schemas/ and synthetic samples under examples/ are
+   provided for evaluation and due-diligence discussion only. They are not a
+   product specification and must not be treated as an open-source grant of
+   the production system.
+
+3. The production Iskra planning layer — including models, prompts, solvers,
+   parsers, ERP/MES connectors, operator UIs, and deployment tooling — is
+   proprietary. Access is available under a separate commercial contract.
+
+4. No customer drawings, live plant data, credentials, or confidential
+   commercial terms are included in this repository.
+
+5. Effect figures described in the reference-plant case are calculated
+   estimates on a model plant, not audited customer results.
+
+Contact for pre-project consulting: telelyhina@icloud.com
+LinkedIn: https://www.linkedin.com/in/igor-telelyukhin/
