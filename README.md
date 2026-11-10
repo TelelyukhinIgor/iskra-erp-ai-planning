@@ -146,7 +146,7 @@ Documentation, schemas, and examples in this repository are under [CC BY-NC-ND 4
 
 This repository is a **demonstration**. If your plant needs a process audit, drawing recognition integrated with a legacy ERP, or workstations for process engineers and buyers, contact me for **pre-project consulting**.
 
-- Email: [telelyhina@icloud.com](mailto:telelyhina@icloud.com)
+- Email: [igor@telelyukhin.com](mailto:igor@telelyukhin.com)
 - LinkedIn: [Igor Telelyukhin](https://www.linkedin.com/in/igor-telelyukhin/)
 
 Ljubljana, Slovenia · remote · English / Russian
