@@ -16,13 +16,15 @@ This repository is a **public showcase**: architecture intent, data-model sketch
 
 ## For plant owners (30 seconds)
 
-### The pain (in your words)
+### Typical planning frictions
 
-- One customer order takes **days in spreadsheets**. Any change means starting over.
-- Drawings and routings live partly on paper and in the heads of **two or three process engineers**. When they leave, the know-how leaves with them.
-- Bottleneck machines overload while others sit idle — you find out too late.
+On the reference model of a household-appliance plant, typical planning frictions include:
+
+- One customer order takes **days in spreadsheets**, and any change means starting over.
+- Drawings and routings live partly on paper and in the heads of **two or three process engineers**; if they leave, the know-how leaves with them.
+- Bottleneck machines overload while others sit idle, and the overload is found out too late.
 - Procurement reacts to shortages; the warehouse holds dead stock and missing parts at the same time.
-- On the reference model, roughly **one order in three** ships late; the director often learns about the miss from the customer.
+- Roughly **one order in three** ships late, and the director often learns about the miss from the customer.
 - A plant-wide status pack for leadership takes **about two days** to assemble by hand (reference-model estimate).
 
 ### What changes
@@ -44,7 +46,7 @@ On a **reference model** of a household-appliance plant (310 staff, 38 product m
 | Overtime hours | baseline | −30% |
 | Leadership status pack | ~2 days manual | near-real-time |
 
-**Disclaimer:** these figures are **calculated estimates on a reference plant model**, not measured results from a named customer implementation. They illustrate order-of-magnitude effect under stated assumptions. See [docs/case-reference-plant.md](docs/case-reference-plant.md).
+**Disclaimer:** these figures are **calculated estimates on a reference plant model** — illustrative assumptions for discussion, not measured statistics of a real plant or results of a real deployment. They illustrate order-of-magnitude effect under stated assumptions. See [docs/case-reference-plant.md](docs/case-reference-plant.md).
 
 ### One flow
 
@@ -96,7 +98,7 @@ Each module has an explicit **in / out of box** boundary (what a pilot includes 
 ### Human-in-the-loop
 
 - Every routing card and plan package has an **approval gate**.
-- Reviewer edits are retained as the plant’s knowledge — the contour learns from corrections under contract deployments; this repo does **not** ship training pipelines.
+- Reviewer edits can be retained as the plant's knowledge in a contract deployment; this repo does **not** ship training pipelines.
 - Leadership Q&A answers only from contour data; missing data is stated as missing (no invented facts).
 
 ### Data flow (conceptual)
