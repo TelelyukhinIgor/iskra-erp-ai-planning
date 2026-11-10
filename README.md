@@ -1,10 +1,16 @@
 # Iskra — AI planning layer over ERP / MES
 
-**Discrete manufacturing. Order to machine plan in one working day — without replacing your ERP.**
+> AI-assisted production planning over your existing ERP/MES. A reference design showing how orders, engineering documents, machine capacity, procurement, and cash flow can be connected in one reviewable workflow.
+
+![Iskra planning workflow](assets/banner.svg)
+
+**Cross-functional planning** · **Human approval gates** · **Works on top of existing ERP**
+
+**Status:** `Reference design · Modelled outcomes · No customer production data`
+
+[Overview](#for-plant-owners-30-seconds) · [Architecture](#for-technical-due-diligence) · [Reference case](docs/case-reference-plant.md) · [Data model](docs/data-model.md) · [Contact](#contact)
 
 This repository is a **public showcase**: architecture intent, data-model sketches, and a reference-plant case with **calculated estimates**. It is not the production system. Production models, algorithms, and integrations are proprietary and available under contract.
-
-> Positioning: *I organize how people and businesses work with AI where mistakes are expensive* — roles, specs, cross-checks, and a human go/no-go on every costly decision.
 
 ---
 
@@ -16,8 +22,8 @@ This repository is a **public showcase**: architecture intent, data-model sketch
 - Drawings and routings live partly on paper and in the heads of **two or three process engineers**. When they leave, the know-how leaves with them.
 - Bottleneck machines overload while others sit idle — you find out too late.
 - Procurement reacts to shortages; the warehouse holds dead stock and missing parts at the same time.
-- Roughly **one order in three** ships late; the director often learns about the miss from the customer.
-- A plant-wide status pack for leadership takes **about two days** to assemble by hand.
+- On the reference model, roughly **one order in three** ships late; the director often learns about the miss from the customer.
+- A plant-wide status pack for leadership takes **about two days** to assemble by hand (reference-model estimate).
 
 ### What changes
 
@@ -43,12 +49,12 @@ On a **reference model** of a household-appliance plant (310 staff, 38 product m
 ### One flow
 
 ```mermaid
-flowchart LR
+flowchart TB
   A[Customer order<br/>any format] --> B[Match products<br/>in digital archive]
   B --> C[BOM + routing cards]
-  C --> D[Machine & shift load]
+  C --> D[Machine and shift load]
   D --> E[Procurement list]
-  E --> F[Cost & cash flow]
+  E --> F[Cost and cash flow]
   F --> G[Tasks to functions]
   G --> H{Human approval}
   H -->|Approved| I[ERP / MES documents]
@@ -130,11 +136,15 @@ Open, generic schemas (evaluation only): [docs/data-model.md](docs/data-model.md
 
 ---
 
+## License
+
+Documentation, schemas, and examples in this repository are under [CC BY-NC-ND 4.0](LICENSE). See [NOTICE](NOTICE): the production system is proprietary.
+
 ## Contact
 
 This repository is a **demonstration**. If your plant needs a process audit, drawing recognition integrated with a legacy ERP, or workstations for process engineers and buyers, contact me for **pre-project consulting**.
 
 - Email: [telelyhina@icloud.com](mailto:telelyhina@icloud.com)
-- LinkedIn: [igor-telelyukhin](https://www.linkedin.com/in/igor-telelyukhin/)
+- LinkedIn: [Igor Telelyukhin](https://www.linkedin.com/in/igor-telelyukhin/)
 
-Ljubljana · remote · English / Russian
+Ljubljana, Slovenia · remote · English / Russian
